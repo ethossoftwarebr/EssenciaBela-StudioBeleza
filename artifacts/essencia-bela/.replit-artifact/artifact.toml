@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Essência Bela — Studio de Beleza"
+version = "1.0.0"
+id = "artifacts/essencia-bela"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24858
+
+[services.development]
+run = "pnpm --filter @workspace/essencia-bela run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/essencia-bela", "run", "build" ]
+publicDir = "artifacts/essencia-bela/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24858"
+BASE_PATH = "/"
